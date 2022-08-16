@@ -1,0 +1,57 @@
+﻿
+
+<style>
+
+    .xtd, .xtdt {
+        background-color:var(--HelpBkColor);
+        padding: 2px 2px;
+        resize:none;
+        font-size:90%;
+
+        color:var(--TextColorDark);
+        width:100%;
+
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden; 
+        margin: 2px 0px;
+
+        background-image: linear-gradient(to right, lightblue, white);
+    }
+        .xtd {
+        margin: -4px 0px;
+    }
+</style>
+
+
+@if (Program.ShowHelp)
+{
+    <div>
+          <p class="xtdt" style="font-weight:bold" @onclick="() => OnClose()">@StrTitle (Click=Lukk)</p>
+        @{
+            foreach (var s in StrInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+            {
+                  <p class="xtd" @onclick="() => OnClose()">@s</p>
+            }
+          }
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public List<string> LstStr { get; set; } = new();
+    [Parameter]
+    public string StrInfo { get; set; } = "";
+    [Parameter]
+    public string StrTitle { get; set; } = "";
+    [Parameter] public EventCallback EvStateHasChanged { get; set; }
+
+
+
+    public async Task OnClose()
+    {
+        Program.ShowHelp = false;
+        await EvStateHasChanged.InvokeAsync();
+    }
+}
