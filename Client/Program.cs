@@ -83,6 +83,7 @@ namespace Pugger3
 
         public static (int, int) WidthHeight()
         {
+return (0, 0);
             var bs = _host?.Services?.GetRequiredService<BrowserService>();
             var dimension = bs?.GetDimensions();
             if (dimension == null)

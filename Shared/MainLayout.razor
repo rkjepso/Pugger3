@@ -1,17 +1,252 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@using Pugger3.Pages;
+@implements IDisposable
+@inject NavigationManager NavigationManager
+<Csscontrol></Csscontrol>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<style>
 
-        <article class="content px-4">
+    _selected {
+        color:red ;
+        text-decoration:underline;
+        
+    }
+    _unseleced {
+        color:white;
+    }
+</style>
+
+@code {
+    //string MenuColor = Csscontrol.ProgramBkColor;
+
+    string Style(string pageCurr) {
+        if (page == pageCurr)
+            return "color:yellow;text-decoration:underline;";
+        if (pageCurr == "Hjem" && page.Length == 0)
+             return "color:yellow;text-decoration:underline;";
+        return "color:white";
+    }
+}
+
+<style>
+    nav {
+        margin: 2px auto 5px;
+        position: relative;
+        width: 100%;
+        height: 40px;
+        background-color: 	hsl(210, 29%, 29%);
+        border-radius: 8px;
+        font-size: 0;
+
+        background-image: linear-gradient(to right, var(--MenuGradientFrom), var(--MenuGradientTo));
+    }
+
+    nav a {
+        line-height: 40px;
+        height: 100%;
+        font-size: 16px;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        color: white;
+   /*     cursor: pointer;*/
+    }
+
+    nav .animation {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        z-index: 0;
+     /*   transition: all .5s ease 0s;*/
+        border-radius: 8px;
+        color:white;
+    }
+
+    a:nth-child(1) {
+        width: 60px;
+    }
+
+    a:nth-child(2) {
+        width: 60px;
+    }
+
+    a:nth-child(3) {
+        width: 60px;
+    }
+
+    a:nth-child(4) {
+        width: 60px;
+    }
+
+    a:nth-child(5) {
+        width: 60px;
+    }
+
+    nav  a:nth-child(1):hover ~ .animation {
+        width: 60px;
+        left: 0;
+        background-color: #1abc9c;
+    }
+
+    nav .start-about, a:nth-child(2):hover ~ .animation {
+        width: 60px;
+        left: 60px;
+        background-color: #e74c3c;
+    }
+
+    nav .start-blog, a:nth-child(3):hover ~ .animation {
+        width: 60px;
+        left: 120px;
+        background-color: #3498db;
+    }
+
+    nav .start-portefolio, a:nth-child(4):hover ~ .animation {
+        width: 60px;
+        left: 180px;
+        background-color: #9b59b6;
+    }
+
+    nav .start-contact, a:nth-child(5):hover ~ .animation {
+        width: 120px;
+        left: 240px;
+        background-color: #e67e22;
+    }
+
+    body {
+        font-size: 12px;
+        font-family: sans-serif;
+        background: #2c3e50;
+    }
+    .a {
+        color:white;
+    }
+
+    nav {
+        white-space:nowrap;
+    }
+</style>
+
+
+<div class="page" style="max-width:2000px">
+    <div class="main" style="width:100%">
+    <nav style="color:white;user-select:none;">
+      <a style=@Style("Hjem")  href="">Hjem</a>
+      <a style=@Style("SimpleList") href="SimpleList">Velg</a>
+      <a style=@Style("Scroll") href="Scroll">Pugg</a>
+      <a style=@Style("ScrollList") href="ScrollList">Liste</a>
+      <a style="color:white" @onclick=@(x=>OnShow())>Hjelp</a>
+      <div class="animation start-home"></div>
+    </nav>
+        <div  style="width:100%"  onresize="OnResize">
             @Body
-        </article>
-    </main>
+        </div>
+    </div>
 </div>
+
+@code
+{
+
+    [JSInvokable]
+#pragma warning disable 1998
+    public async static Task fnFromJS()
+    {
+        //Do some stuff
+        //Program.ShowHelp = false;
+        try
+        {
+            Program.InvokeCurrentStateHasChanged();
+        }
+        catch(Exception )
+        {
+
+        }
+
+
+    }
+#pragma warning restore 1998
+
+
+    static MainLayout? _this = null;
+    #pragma warning disable 1998,8622
+    protected async override Task OnInitializedAsync()
+    {
+        Program.currentStateHasChanged = StateHasChanged;
+        NavigationManager.LocationChanged += LocationChanged;
+    }
+
+    private string StrHelp    
+    {
+        get {
+            return "Hjelp";
+        }
+    }
+
+    private async Task OnShow()
+    {
+        try
+        {
+            Program.ShowHelp = !Program.ShowHelp;
+            bool b = Program.ShowHelp;
+            Action? a = Program.currentStateHasChanged;
+
+            a?.Invoke();
+
+        }
+        catch
+        {         
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        _this = this;
+    }
+
+    public static void DoStateHasChanged()
+    {
+        _this?.StateHasChanged();
+    }
+
+    public void OnSwap()
+    {
+        SimpleList.Obj?.OnSwap();
+    }
+
+    string GetPage(string location)
+    {
+        string[] a = location.Split(@"/");
+        string?   s = a.LastOrDefault();
+        return s ?? "";
+    }
+    string page="";
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        page = GetPage(e.Location);
+        Program.ShowHelp = false;
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= LocationChanged;
+    }
+
+    void OnResize()
+    {
+        try
+        {
+            //Program.ShowHelp = false;
+            Program.InvokeCurrentStateHasChanged();  
+        }
+        catch (Exception)
+        {
+            
+        }
+
+    }
+}
+

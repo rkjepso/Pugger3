@@ -1,36 +1,120 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Pugger3</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿
+<style>
+    .coolNav {
+        margin : 5px;
+        border : 2px;
+        padding : 3px;
+        color : yellow;
+    }
+</style>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
+
+@*<div class="top-row pl-4 navbar navbar-dark" style="zoom:90%">*@
+    @*<a class="navbar-brand" href=""></a>*@
+@*<div class = "coolNav">
+
+
+    <a class="oi oi-home"  href=""></a>
+    <a class="oi oi-cart"  href="SimpleList"></a>
+    <a class="oi oi-loop" style="color:yellow" href="Scroll"></a>
+    <a class="oi oi-list" style="color:white" href="gloser/Practice"></a>
+    <a class="oi oi-clock" style="color:white" href="scrolltest"></a>
+    <a class="oi oi-wrench" style="color:white" href="Setup/1"></a>
+    <a class="oi oi-account-login" style="color:white" @onclick="ToggleNavMenu"></a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+</div>*@
+
+@*<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="oi oi-home" aria-hidden="true"></span> Hjem
             </NavLink>
-        </div>
-        <div class="nav-item px-3">
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="SimpleList">
+                <span class="oi oi-cart" aria-hidden="true"></span>Velg ord
+            </NavLink>
+        </li>
+
+        
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Scroll">
+                <span class="oi oi-loop" aria-hidden="true"></span>Pugg ord
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="gloser/Practice">
+                <span class="oi oi-list" aria-hidden="true"></span>Pugg liste
+            </NavLink>
+        </li>
+
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="scrolltest">
+                <span class="oi oi-clock" aria-hidden="true"></span>Gloseprøve
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Tests">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>Vis Prøver
+            </NavLink>
+
+        </li>
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Setup/1">
+                <span class="oi oi-wrench" aria-hidden="true"></span>Oppsett
+            </NavLink>
+        </li>
+
+
+
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Login" hidden="@IsHidden">
+                <span class="oi oi-lock-unlocked" aria-hidden="true"></span>Login
+            </NavLink>
+        </li>
+
+        <li class="nav-item px-3">
             <NavLink class="nav-link" href="counter">
                 <span class="oi oi-plus" aria-hidden="true"></span> Counter
             </NavLink>
-        </div>
-        <div class="nav-item px-3">
+        </li>
+
+        <li class="nav-item px-3">
             <NavLink class="nav-link" href="fetchdata">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
             </NavLink>
-        </div>
-    </nav>
-</div>
+        </li>
+    </ul>
+</div>*@
 
 @code {
+
+    private bool IsHidden
+    {
+        get
+        {
+            return Program.IsLoggedIn;
+        }
+    }
+
+    public void DoStateHasChanged()
+    {
+        StateHasChanged();
+    }
+
     private bool collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {

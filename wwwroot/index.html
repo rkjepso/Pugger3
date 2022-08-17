@@ -4,15 +4,141 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Pugger3</title>
+    <title>Pugger</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/appv1.css" rel="stylesheet" />
     <link href="Pugger3.styles.css" rel="stylesheet" />
+    <script>
+        function reset_animation(strId , sec) {
+            var el = document.getElementById(strId);
+            el.style.animation = 'none';
+            el.offsetHeight; /* trigger reflow */
+            el.style.animation = null;
+            el.style.animationDuration = sec;
+        }
+        window.getDimensions = function () {
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+        };
+
+        function scrollTop() {
+
+            window.scrollTo(0, 0);
+        }
+
+        function scrollElementTop(strId) {
+            var offsetTop = getOffsetTop(document.getElementById(strId));
+            window.scrollTo(0, offsetTop);
+        }
+
+        function Test() {
+            DotNet.invokeMethod("Pugger.Client", "fnFromJS");
+        }
+ 
+    </script>
+
+    <style>
+        .container {
+            width: 80%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 10%;
+            background: #292970;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+            align-content: center;
+            background-color: darkblue;
+            background-image: linear-gradient(to right, hsla(200, 40%, 40%), hsla(200, 40%, 50%));
+        }
+
+        .flex {
+            min-height: 60pt;
+        }
+
+        @keyframes loading {
+            0% {
+                width: 50pt;
+                height: 50pt;
+                margin-top: 0;
+            }
+
+            25% {
+                height: 4pt;
+                margin-top: 23pt;
+            }
+
+            50% {
+                width: 4pt;
+            }
+
+            75% {
+                width: 50pt;
+            }
+
+            100% {
+                width: 50pt;
+                height: 50pt;
+                margin-top: 0;
+            }
+        }
+
+        .loader {
+            width: 50pt;
+            height: 50pt;
+            border-radius: 100%;
+            border: yellow 5pt solid;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: transparent;
+            animation: loading 600ms infinite;
+            color:yellow;
+        }
+
+        .load-text {
+            padding-top: 15px;
+            text-align: center;
+            font: 14pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: yellow;
+        }
+
+      
+
+        @keyframes pugging {
+            0% {
+                color: var(--PanelBkColor);
+            }
+
+            30% {
+                color: var(--PanelBkColor);
+            }
+
+            100% {
+                color: blue;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <div id="app">Loading...</div>
+<body >
+    <!--<div id="app">Loading...</div>-->
+    <div id="app">
+
+        <div class="container">
+            <div class="flex">
+                <div class="loader">
+                </div>
+            </div>
+            <div class="load-text">
+                Vent mens Pugger lastes ....
+            </div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
