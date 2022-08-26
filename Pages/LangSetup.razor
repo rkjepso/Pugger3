@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/LangSetup"
 
 
 @using Pugger3.Services;
@@ -137,8 +137,8 @@
 
 
 #pragma warning disable 1998,8622,8602
-    static Index? _this = null;
-    static bool Init = true;
+    static LangSetup? _this = null;
+
     protected async override Task OnInitializedAsync()
     {
         Program.currentStateHasChanged = StateHasChanged;
@@ -152,9 +152,6 @@
         if (ms > 10)
             StrSuccess = $"Orliste lastet ok - {ms} ms";
         _this = this;
-        if (Init)
-            NavigationManager.NavigateTo("/Scroll");
-        Init = false;
     }
 
     async Task OnTestText()

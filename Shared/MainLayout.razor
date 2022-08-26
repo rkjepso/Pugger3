@@ -138,7 +138,7 @@
       <a style=@Style("Scroll") href="Scroll">Pugg</a>
       <a style=@Style("ScrollList") href="ScrollList">Liste</a>
       <a style=@Style("SimpleList") href="SimpleList">Ord</a>
-      <a style=@Style("Hjem") href="">Språk</a>
+      <a style=@Style("LangSetup") href="LangSetup">Språk</a>
       
       <a style="color:white" @onclick=@(x=>OnShow())>Hjelp</a>
       <div class="animation start-home"></div>
@@ -178,6 +178,8 @@
     {
         Program.currentStateHasChanged = StateHasChanged;
         NavigationManager.LocationChanged += LocationChanged;
+
+        NavigationManager.NavigateTo("/Scroll");
     }
 
     private string StrHelp    
