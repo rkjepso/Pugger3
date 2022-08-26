@@ -126,11 +126,8 @@
     static string StrInfo { get
         {
             string s = 
-@"            1 Hjem - velg språk og ordliste
-    2 Velg - velg ordene du skal pugge
-    3 Pugg - pugg ett og ett ord
-    3 Pugg - via liste
-    5 Test - gloseprøve.
+@"            Velg språk og ordliste
+
 ";
             s += $"  (Ver : {Program.GetVersionGloser} Dim {Program.WidthHeight().ToString()}:)";
 
@@ -141,6 +138,7 @@
 
 #pragma warning disable 1998,8622,8602
     static Index? _this = null;
+    static bool Init = true;
     protected async override Task OnInitializedAsync()
     {
         Program.currentStateHasChanged = StateHasChanged;
@@ -154,6 +152,9 @@
         if (ms > 10)
             StrSuccess = $"Orliste lastet ok - {ms} ms";
         _this = this;
+        if (Init)
+            NavigationManager.NavigateTo("/Scroll");
+        Init = false;
     }
 
     async Task OnTestText()

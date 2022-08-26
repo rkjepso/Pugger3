@@ -52,7 +52,7 @@
     </span>
 
      <span class="coolSpan">
-        @foreach (var _ms in new[] { 1000, 1700, 3000, 5000, 1000000})
+        @foreach (var _ms in new[] { 1000, 1700, 3000, 5000})
         {
             int ms = _ms;
             <button class=@Csscontrol.BoolStyle(ms==MsWord) @onclick="@(()=>OnBlinkInterval(ms))">@(BlinkStr(ms))</button>

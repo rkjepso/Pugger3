@@ -68,13 +68,35 @@
     .level {
         color: var(--FromWord);
     }
+
+    .engButton, .engButtonGray {
+        border-radius: 0.3em;
+        height: 27px;
+        width: 45px;
+        margin: 0em 0.3em;
+        background: url('Img/uk.jpg');
+        background-size: cover;
+       
+    }
+
+    .engImageGray {
+        filter: grayscale(1);
+    }
+
+    .engButton:hover, .engButtonGray:hover {
+        border: 0.15em solid red;
+        margin: 0.05em 0.3em;
+    }
+
 </style>
 
 <span class="coolSpan">
     <button class="coolButton" @onclick="@(()=>OnRestart())"> ⟳ </button>
-    <button class=@Csscontrol.BoolStyle(UseEnglish) @onclick="OnEnglish">
-        <img src="Img/uk.jpg" width=35 height=25 />
-    </button>
+    @*    <button class="coolButton" @onclick="@(()=>OnEnglish())">
+    </button>*@
+
+    @*  <img class=@ClsEngImage() src='Img/uk.jpg' />*@
+
     <img class="imgSmileyButton" @onclick="@(()=>OnChangeSmiley())" src=@Smileys[SmileyIndex]>
 </span>
 
@@ -82,11 +104,15 @@
     @{
         foreach (var ms in new int[] { 1000, 2000, 3000, 4000, 5000 })
         {
-                <button class=@Csscontrol.BoolStyle(MsPugg == ms) @onclick="@(()=>OnMsInterval(ms))">@((double)ms/1000)s</button>
+                <button class=@Csscontrol.BoolStyle(MsPugg == ms) @onclick="@(()=>OnMsInterval(ms))">@((double)ms / 1000)s</button>
         }
     }
 </span>
+<span class="coolSpan">
+   @* <button class="engButton"></button>*@
+    <button class=@Csscontrol.BoolStyle(UseEnglish) @onclick="@OnEnglish">Eng</button>
 
+</span>
 
 
 @{
@@ -108,7 +134,7 @@
                     </thead>
                     <tr>
                         <td class="wordinfo">
-                            @(i==0 ? StrRest : "")
+                            @(i == 0 ? StrRest : "")
                         </td>
                         <td>
                             @{
@@ -151,13 +177,15 @@
 }
 
 @code {
-#pragma warning disable 1998, 8618, 8625,4014, 8622
+#pragma warning disable 1998, 8618, 8625, 4014, 8622
     string FromWordD(TWord w)
     {
         string s;
         s = $"{(SwapWord ? w.ToWord : w.FromWord)}  ";
         return s;
     }
+
+    string ClsEngImage() => UseEnglish ? "engImage" : "engImageGray";
 
     string ToWordD(TWord w)
     {
@@ -183,10 +211,10 @@
 @code {
     public string StrFlag => IStorage._GetData().Info;
     private string StrError { get; set; } = "";
-    private string StrWarn { get; set; }= "";
-    private string StrInfo { get; set; }= "";
-    private string StrSuccess { get; set; }= "";
-    private string StrTitle { get; set; }= "";
+    private string StrWarn { get; set; } = "";
+    private string StrInfo { get; set; } = "";
+    private string StrSuccess { get; set; } = "";
+    private string StrTitle { get; set; } = "";
     private bool UseEnglish { get; set; } = false;
     public void OnEnglish()
     {
