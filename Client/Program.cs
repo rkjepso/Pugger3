@@ -132,7 +132,7 @@ return (0, 0);
             try
             {
                 string strLang = LangInNorwegian(GetFromLangFromLangT(BaseDataObj.LangT));
-
+                data.Default();
                 data.IdxStart = 0;
                 data.Step = 10;
                 data.Order = Order.Sequental;
@@ -141,8 +141,7 @@ return (0, 0);
                 Storage._SetData(data);
 
                 var lst = GetDictionary();
-                //await Storage.SetItem(Defs.keySelectedWords, lst.GetRange(0, data.Step));
-                SaveSelectedWords(lst.GetRange(0, data.Step));
+                 SaveSelectedWords(lst.GetRange(0, data.Step));
             }
             catch (Exception)
             {

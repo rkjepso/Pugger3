@@ -49,6 +49,13 @@ static public class Misc
 
     public static bool IsEmpty<T>(this List<T> lst) => lst.Count == 0;
 
+    public static bool IsNullOrEmpty<T>(this List<T> lst )
+    {
+        if (lst == null)
+            return true;
+        return !lst.Any();
+    }
+
     public static T GetAtSafe<T>(this T[] arr, int i)
     {
         if (arr == null)

@@ -258,8 +258,8 @@ Smileyen ved det engelske flagget er et filter";
             lstWords = new();
             lstWordsSav = new();
             lstWords = Program.GetSelectedWords();
-            if (lstWords == null)
-                throw new Exception("Du må velge ord i handlekurven !");
+            if (Misc.IsNullOrEmpty(lstWords))
+                throw new Exception("Du må velge språk/ord !");
 
             timerW = null;
             timerW = new System.Timers.Timer();

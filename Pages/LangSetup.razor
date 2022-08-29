@@ -152,6 +152,12 @@
         if (ms > 10)
             StrSuccess = $"Orliste lastet ok - {ms} ms";
         _this = this;
+
+        if (Misc.IsNullOrEmpty(Program.GetSelectedWords()))
+        {
+            Program.CreateStartupData();
+            _DictionarySelection.DoStateHasChanged();
+        }
     }
 
     async Task OnTestText()

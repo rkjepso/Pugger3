@@ -179,7 +179,12 @@
         Program.currentStateHasChanged = StateHasChanged;
         NavigationManager.LocationChanged += LocationChanged;
 
-        NavigationManager.NavigateTo("/Scroll");
+
+        var lst = Program.GetSelectedWords();
+        if (Misc.IsNullOrEmpty(lst))
+            NavigationManager.NavigateTo("/LangSetup");
+        else
+            NavigationManager.NavigateTo("/Scroll");
     }
 
     private string StrHelp    
