@@ -52,7 +52,7 @@
     </span>
 
      <span class="coolSpan">
-        @foreach (var _ms in new[] { 1000, 1700, 3000, 5000})
+        @foreach (var _ms in new[] { 1000, 2000, 3000, 5000})
         {
             int ms = _ms;
             <button class=@Csscontrol.BoolStyle(ms==MsWord) @onclick="@(()=>OnBlinkInterval(ms))">@(BlinkStr(ms))</button>
@@ -435,84 +435,7 @@ else
         OnReset(false);
     }
 
-#region "Dead Code"
-    //private void OnRandom()
-    //{
-    //    Random = !Random;
-    //    FilterAndSort();
-    //    wordIndex = 0;
-    //    timer?.Stop();
-    //    OnStopp();
-    //}
 
-    //private void FilterAndSort()
-    //{
-    //    lstWords = lstWords.Where(w => GetSmileyIndex(w.Level) <= SmileyIndex).ToList();
-    //    if (Random)
-    //        lstWords = lstWords.OrderBy(w => Guid.NewGuid()).ToList();
-    //    else
-    //        lstWords = lstWords.OrderBy(w => w.FromWord).ToList();
-    //    lstWords.ForEach(w => w.ToWordAns = "");
-    //}
-    //async Task SelectWords()
-    //{
-
-    //    if (LstDict == null || LstDict.Count == 0)
-    //        return;
-
-    //    lstWords ??= new();
-    //    lstWords.Clear();
-    //    lstWords = await Program.GetSelectedWords();
-
-    //    FilterAndSort();
-    //    if (lstWords.Count()==0)
-    //    {
-    //        //StrWarn = "Ingen elementer. Endre smiley filter ?";
-    //        return;
-    //    }
-    //    UpdateStrInfo();
-
-    //    StrSuccess = "";
-    //    StateHasChanged();
-
-
-    //}
-
-
-    //warmup = 0;
-    //lstWords = GetDictionary().FindRandomWords(Size);
-    //StateHasChanged();
-    //return;
-
-    //timer.Interval = MsBlink;
-
-
-
-    //int max = Math.Min(999, lstWords.Count);
-    //if (wordIndex == max  )
-    //{
-    //    lstWords = lstWords.Where(w => w.IsCorrect == false).ToList();
-    //    lstWords.ForEach(w => w.ToWordAns = "");
-    //    wordIndex = 0;
-
-
-
-    //    {
-    //        await JS.InvokeVoidAsync("scrollTop");
-    //    }
-
-    //    FilterAndSort();
-
-    //}
-
-    //else
-    //{
-    //    //lstWords[wordIndex].ToWordAns = ToWordD(lstWords[wordIndex]); 
-    //    //wordIndex++;
-    //    if (lstWords.Count > 0)
-    //        lstWords.RemoveAt(0);
-    //}
-#endregion
 
  }
 
