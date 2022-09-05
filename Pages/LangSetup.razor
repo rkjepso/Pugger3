@@ -5,12 +5,12 @@
 @using static Pugger3.Functions;
 
 @inject IJSRuntime JS
-@inject NavigationManager NavigationManager
+
 @inject BrowserService Service
 @inject IStorage IStorage
 
 
-@implements IDisposable
+
 
 <Csscontrol></Csscontrol>
 
@@ -144,7 +144,6 @@
         Program.currentStateHasChanged = StateHasChanged;
 
         // Subscribe to the event
-        NavigationManager.LocationChanged += LocationChanged;
         base.OnInitialized();
 
         var dt = DateTime.Now;
@@ -220,18 +219,5 @@
             StrError = "Error changing language : " + e.Message;
         }
 
-    }
-
-
-
-
-    void LocationChanged(object sender, LocationChangedEventArgs e)
-    {
-        //       _Setup.OnSave();
-    }
-#pragma warning disable 1998
-    async void IDisposable.Dispose()
-    {
-        NavigationManager.LocationChanged -= LocationChanged;
     }
 }

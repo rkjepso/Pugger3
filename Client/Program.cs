@@ -84,7 +84,7 @@ namespace Pugger3
 
         public static (int, int) WidthHeight()
         {
-return (0, 0);
+
             var bs = _host?.Services?.GetRequiredService<BrowserService>();
             var dimension = bs?.GetDimensions();
             if (dimension == null)
@@ -119,12 +119,11 @@ return (0, 0);
         static public void InvokeCurrentStateHasChanged()
         {
             currentStateHasChanged?.Invoke();
-            //PuggerX.Client.Pages.Index.DoStateHasChanged();
         }
 
 
 
-        public static Data CreateStartupData()
+        public static Data CreateStartupData(int TotalWords=250)
         {
             if (Storage == null)
                 return new Data();
@@ -135,6 +134,7 @@ return (0, 0);
                 data.Default();
                 data.IdxStart = 0;
                 data.Step = 10;
+                data.TotalWords = TotalWords;
                 data.Order = Order.Sequental;
                 data.Info = string.Format($"{strLang} Ord 1-{data.Step}. {data.TotalWords} viktigste");
 

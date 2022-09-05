@@ -6,7 +6,7 @@
         background-color:var(--HelpBkColor);
         padding: 2px 2px;
         resize:none;
-        font-size:90%;
+
 
         color:var(--TextColorDark);
         width:100%;
@@ -14,12 +14,23 @@
         display: inline-block;
         white-space: nowrap;
         overflow: hidden; 
-        margin: 2px 0px;
+        margin: -1px 0px;
 
         background-image: linear-gradient(to right, lightblue, white);
     }
-        .xtd {
-        margin: -4px 0px;
+
+
+
+    .comment, .commentH {
+ 
+    
+        padding: 10px;
+        margin: 0px;
+        white-space:normal;
+        background-color: #d0e2bc;
+        font: 1.0em/1.2em cursive;
+        color: #095484;
+        background-image: linear-gradient(to right, lightblue, white);
     }
 </style>
 
@@ -27,13 +38,8 @@
 @if (Program.ShowHelp)
 {
     <div>
-          <p class="xtdt" style="font-weight:bold" @onclick="() => OnClose()">@StrTitle (Click=Lukk)</p>
-        @{
-            foreach (var s in StrInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
-            {
-                  <p class="xtd" @onclick="() => OnClose()">@s</p>
-            }
-          }
+          <p class="commentH" style="font-weight:bold" @onclick="() => OnClose()">@StrTitle (Click=Lukk)</p>
+          <p class="comment" @onclick="() => OnClose()">@StrInfo</p>            
     </div>
 }
 

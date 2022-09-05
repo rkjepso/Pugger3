@@ -68,26 +68,19 @@
     {
 
         dt = IStorage.GetItem<Data>(Defs.keySetup);
-        if (dt.TotalWords == 0) //dt.Equals(dtDefault) // object.Equals(dt, default(Data))
+        if (dt.TotalWords == 0) 
         {
-            dt.Default();
-            OnSave();
+            dt = Program.CreateStartupData();
         }
         orgTotalWords = dt.TotalWords;
     }
 
 
-    public async void OnSave()
+    private async void OnSave()
     {
         IStorage._SetData(dt);
         StrWarn =  "";
-        if (dt.TotalWords != orgTotalWords)
-        {
-            IStorage.RemoveItem(Defs.keySelectedWords);
-            StrInfo = "";
-            orgTotalWords = dt.TotalWords;
-            dt = Program.CreateStartupData();
-        }
+        dt = Program.CreateStartupData(dt.TotalWords); 
         InfoBox?.DoStateHasChanged();
         StateHasChanged();
     }
@@ -100,7 +93,7 @@
 
     void LocationChanged(object sender, LocationChangedEventArgs e)
     {
-        OnSave();
+      //  OnSave();
     }
     async void IDisposable.Dispose()
     {
