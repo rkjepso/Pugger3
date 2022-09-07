@@ -155,7 +155,7 @@
         if (Misc.IsNullOrEmpty(Program.GetSelectedWords()))
         {
             Program.CreateStartupData();
-            _DictionarySelection.DoStateHasChanged();
+            _DictionarySelection?.DoStateHasChanged();
         }
     }
 

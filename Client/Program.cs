@@ -21,7 +21,7 @@ namespace Pugger3
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             MyStuff();
-
+            await AccountService.Load(Program.BaseDataObj.LangT);
             await builder.Build().RunAsync();
         }
 
@@ -43,8 +43,6 @@ namespace Pugger3
             BrowserService = host.Services.GetRequiredService<BrowserService>();
 
             _host = host;
-
-
 
             try
             {
