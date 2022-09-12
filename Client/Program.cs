@@ -234,19 +234,12 @@ namespace Pugger3
                 return;
 
             var d = lst.ToDictionary(keySelector: w => w.ID);
-            //foreach (var w in lstS)
-            //{
-            //    if (d.Keys.Contains(w.ID))  
-            //        w.Level = d[w.ID].Level;
-            //}
             for (int i = 0; i < lst.Count; i++)
             {
                 if (d.Keys.Contains(lst[i].ID))
                     lst[i] = lst[i] with { Level = d[lst[i].ID].Level };
             }
-
             SaveSelectedWords(lstS);
-
             UpdateListStat(lstS);
         }
     }
