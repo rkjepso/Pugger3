@@ -20,6 +20,7 @@
         font-size: 2em;
         display: inline-block;
         margin: 3px 0px 10px;
+        color : black;
     }
 
     .toWord {
@@ -104,7 +105,7 @@
     @{
         foreach (var ms in new int[] { 1000, 2000, 3000, 4000, 5000 })
         {
-                <button class=@Csscontrol.BoolStyle(MsPugg == ms) @onclick="@(()=>OnMsInterval(ms))">@((double)ms / 1000)s</button>
+                    <button class=@Csscontrol.BoolStyle(MsPugg == ms) @onclick="@(()=>OnMsInterval(ms))">@((double)ms / 1000)s</button>
         }
     }
 </span>
@@ -123,51 +124,51 @@
     @if (w != null)
     {
     <div class="coolDiv" hidden=@(Tot()==0) style=@_style @onclick="@(()=>OnRemoveWord())">
-                <table>
-                    <thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:50%"></th>
+                                <th style="width:10%"></th>
+                                <th style="width:40%"></th>
+                                <th style="width:10%"></th>
+                            </tr>
+                        </thead>
                         <tr>
-                            <th style="width:50%"></th>
-                            <th style="width:10%"></th>
-                            <th style="width:40%"></th>
-                            <th style="width:10%"></th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td class="wordinfo">
-                            @(i == 0 ? StrRest : "")
-                        </td>
-                        <td>
-                            @{
+                            <td class="wordinfo">
+                                @(i == 0 ? StrRest : "")
+                            </td>
+                            <td>
+                                @{
                             if (w.IsDeleted)
                             {
-                                        <p class="fromWord">&#10004; @FromWordD(w)</p>
+                                                <p class="fromWord">&#10004; @FromWordD(w)</p>
                             }
                             else
                             {
-                                        <p class="fromWord">@FromWordD(w)</p>
+                                                <p class="fromWord">@FromWordD(w)</p>
                             }
-                            }
-                        </td>
-                        <td></td>
-                        <td>
-                            <div class="smiley">
-                                <img class="imgSmileyButton" src=@GetSmiley(NewLevel(w)) />
-                            </div>
-                        </td>
-                    </tr>
+                                }
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="smiley">
+                                    <img class="imgSmileyButton" src=@GetSmiley(NewLevel(w)) />
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <p class="toWord" id=@StrAni(i)>@ToWordD(w)</p>
-                        </td>
-                        <td></td>
-                        <td class="level">
-                            @NewLevel(w)%
-                        </td>
-                    </tr>
-                </table>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <p class="toWord" id=@StrAni(i)>@ToWordD(w)</p>
+                            </td>
+                            <td></td>
+                            <td class="level">
+                                @NewLevel(w)%
+                            </td>
+                        </tr>
+                    </table>
     </div>
 
         //<div class="sentences">
