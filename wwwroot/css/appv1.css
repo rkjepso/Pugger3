@@ -63,20 +63,6 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
-@keyframes pugging0 {
-    0% {
-        opacity: 0.0;
-        color: blue;
-    }
 
-    40% {
-        color: orangered;
-        opacity: 0.0;
-    }
-
-    100% {
-        color: orangered;
-    }
-}
 
 

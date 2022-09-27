@@ -20,8 +20,8 @@
 
 
         --StdBorder :  0.05em solid black;/*var(--ControlColor);*/
-        --FromWord : hsl(var(--BaseColor), 100%, 20%);
-        --ToWord : hsl(var(--BaseColorInv), 100%, 20%);
+        --FromWord : black;/*hsl(var(--BaseColor), 100%, 20%);*/
+        --ToWord : dark blue;
 
         --BodyGradientFrom : hsla(var(--BaseColor), var(--ColorIntensity), 30%);
         --BodyGradientTo : hsla(var(--BaseColor), var(--ColorIntensity), 70%);
@@ -162,6 +162,22 @@
         border: 0.15em  solid red;
         border-radius:100%;
     }
+
+   @@keyframes pugging0 {
+    0% {
+        opacity: 0.0;
+        color: var(--PanelBkColor);
+    }
+
+    40% {
+        color: darkblue;
+        opacity: 0.0;
+    }
+
+    100% {
+        color: darkblue;
+    }
+}
 </style>
 @code {
 
