@@ -1,0 +1,5 @@
+﻿
+
+function JSAlert() {
+    alert("Hello");
+}
